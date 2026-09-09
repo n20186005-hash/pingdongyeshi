@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pingdongyeshi.com/sitemap-index.xml
