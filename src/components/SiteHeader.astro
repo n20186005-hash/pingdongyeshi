@@ -1,0 +1,41 @@
+---
+import type { Locale } from '../data/site';
+import { localizedPath, ui } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  isHome?: boolean;
+}
+
+const { locale, isHome = false } = Astro.props;
+const copy = ui[locale];
+const homeHref = localizedPath(locale);
+const langHref = localizedPath(locale === 'zh' ? 'en' : 'zh');
+const navItems = copy.navItems.map((item) => {
+  const href = item.href.startsWith('/') ? item.href : isHome ? item.href : `${homeHref}${item.href}`;
+  return { href, label: item.label };
+});
+---
+
+<header class="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#09070d]/82 backdrop-blur-xl">
+  <div class="container flex h-[72px] items-center justify-between gap-5">
+    <a href={homeHref} class="flex items-center gap-3" aria-label={copy.brandAlt}>
+      <img src="/logo.svg" alt={copy.brandAlt} class="h-10 w-auto" />
+    </a>
+    <nav class="hidden items-center gap-6 text-sm lg:flex" aria-label={copy.navLabel}>
+      {navItems.map((item) => <a class="nav-link" href={item.href}>{item.label}</a>)}
+    </nav>
+    <div class="flex items-center gap-3">
+      <a
+        href={langHref}
+        class="rounded-full border border-white/20 bg-white/5 px-3 py-2 text-xs font-black text-[#fff3cf] backdrop-blur transition hover:bg-white/10"
+        aria-label={copy.langSwitchAria}
+        hreflang={locale === 'zh' ? 'en' : 'zh-Hant-TW'}
+      >{copy.langSwitch}</a>
+      <a
+        href={isHome ? '#map' : `${homeHref}#map`}
+        class="rounded-full bg-[#ffb20f] px-4 py-2 text-sm font-black text-[#1a0c08] transition hover:translate-y-[-1px]"
+      >{copy.mapCta}</a>
+    </div>
+  </div>
+</header>

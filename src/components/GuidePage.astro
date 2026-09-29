@@ -1,0 +1,114 @@
+---
+import type { Locale } from '../data/site';
+import type { GuideArticle } from '../content/guides.zh';
+
+interface Props {
+  locale: Locale;
+  guide: GuideArticle;
+}
+
+const { guide } = Astro.props;
+---
+
+<article class="pt-[72px]">
+  <section class="section pt-12">
+    <div class="container">
+      <nav class="mb-6 text-sm" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap items-center gap-2 text-[#9f9181]">
+          <li><a class="underline underline-offset-4 hover:text-[#ffb20f]" href="/">首頁</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" class="text-[#d6c6b4]">{guide.breadcrumb}</li>
+        </ol>
+      </nav>
+      <p class="kicker">{guide.kicker}</p>
+      <h1 class="display mt-2 text-5xl font-black text-[#fff3cf] md:text-6xl">{guide.h1}</h1>
+      <p class="mt-6 max-w-3xl text-lg text-[#cfc0ae]">{guide.lead}</p>
+    </div>
+  </section>
+
+  {guide.sections.map((section) => (
+    <section class="section">
+      <div class="container max-w-4xl">
+        <h2 class="display text-3xl font-black text-[#fff3cf] md:text-4xl">{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => <p class="mt-4 leading-relaxed text-[#c7b8a6]">{paragraph}</p>)}
+        {section.bullets && (
+          <ul class="mt-5 space-y-2">
+            {section.bullets.map((bullet) => (
+              <li class="flex gap-2 text-[#c7b8a6]"><span class="text-[#ffb20f]">›</span><span>{bullet}</span></li>
+            ))}
+          </ul>
+        )}
+        {section.table && (
+          <div class="mt-6 overflow-x-auto rounded-2xl border border-white/10">
+            <table class="w-full min-w-[560px] border-collapse text-left text-sm">
+              <thead class="bg-white/5 text-[#ffb20f]">
+                <tr>
+                  {section.table.head.map((cell) => <th class="px-4 py-3 font-black">{cell}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {section.table.rows.map((row) => (
+                  <tr class="border-t border-white/10 align-top">
+                    {row.map((cell, i) => <td class={i === 0 ? 'px-4 py-3 font-bold text-[#fff3cf]' : 'px-4 py-3 text-[#c7b8a6]'}>{cell}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </section>
+  ))}
+
+  <section class="section bg-white/[.025]">
+    <div class="container max-w-4xl">
+      <p class="kicker">Quick tips</p>
+      <h2 class="display mt-2 text-3xl font-black text-[#fff3cf] md:text-4xl">走之前先記住這幾點</h2>
+      <div class="mt-8 grid gap-5 sm:grid-cols-2">
+        {guide.tips.map((tip) => (
+          <div class="sign-card p-5">
+            <h3 class="font-black text-[#fff3cf]">{tip.title}</h3>
+            <p class="mt-2 text-sm text-[#b9aa99]">{tip.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container max-w-4xl">
+      <p class="kicker">FAQ</p>
+      <h2 class="display mt-2 text-3xl font-black text-[#fff3cf] md:text-4xl">常見問題</h2>
+      <div class="faq mt-8">
+        {guide.faqs.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p class="mt-3 max-w-3xl text-[#bdae9c]">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white/[.025]">
+    <div class="container">
+      <p class="kicker">延伸閱讀</p>
+      <h2 class="display mt-2 text-3xl font-black text-[#fff3cf] md:text-4xl">相關指南</h2>
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {guide.related.map((item) => (
+          <a class="sign-card p-6 transition hover:-translate-y-1 hover:border-white/20" href={item.href}>
+            <h3 class="text-xl font-black text-[#fff3cf]">{item.label}</h3>
+            <p class="mt-3 text-sm text-[#b1a291]">{item.note}</p>
+            <p class="mt-4 text-sm font-black text-[#ffb20f]">{item.href}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-12">
+    <div class="container max-w-4xl">
+      <p class="rounded-2xl border border-white/10 bg-white/[.03] p-4 text-sm text-[#998b7b]">{guide.bodyNote}</p>
+    </div>
+  </section>
+</article>

@@ -1,0 +1,316 @@
+---
+import { ATTRACTION, type Locale } from '../data/site';
+import { guideLinks, ui } from '../i18n';
+import type { GuideContent } from '../content/types';
+
+interface Props {
+  locale: Locale;
+  content: GuideContent;
+}
+
+const { locale, content } = Astro.props;
+const guides = guideLinks(locale);
+const hero = content.hero;
+const photoLead = content.photos.items[0];
+const photoRest = content.photos.items.slice(1);
+const currentName = ATTRACTION.name[locale];
+---
+
+<section class="relative min-h-[760px] overflow-hidden pt-[72px]">
+  <div class="absolute inset-0">
+    <img
+      class="hero-photo h-full w-full object-cover"
+      src={photoLead.src}
+      alt={photoLead.alt}
+      loading="eager"
+      fetchpriority="high"
+      width="1200"
+      height="800"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,3,9,.94)_0%,rgba(7,5,11,.72)_46%,rgba(8,5,10,.28)_78%,rgba(8,5,10,.5)_100%)]"></div>
+    <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0a0710] to-transparent"></div>
+  </div>
+  <div class="container relative grid min-h-[688px] items-center py-16 lg:grid-cols-[1.15fr_.85fr]">
+    <div class="max-w-3xl">
+      <div class="mb-6 flex flex-wrap gap-2">
+        {hero.badges.map((badge) => <span class="badge">{badge}</span>)}
+      </div>
+      <p class="kicker mb-4">{hero.kicker}</p>
+      <h1 class="display glow text-5xl font-black text-[#fff3cf] sm:text-7xl lg:text-[6.7rem]">
+        {hero.titleTop}<br /><span class="text-[#ffb20f]">{hero.titleAccent}</span>
+      </h1>
+      <p class="mt-7 max-w-2xl text-lg text-[#e4d8c7] md:text-xl">{hero.lead}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#eat" class="rounded-full bg-[#f12d3c] px-6 py-3 font-black text-white shadow-[0_0_30px_rgba(241,45,60,.28)] transition hover:scale-[1.02]">{hero.primaryCta}</a>
+        <a href="#plan" class="rounded-full border border-white/20 bg-white/5 px-6 py-3 font-bold text-[#fff3cf] backdrop-blur transition hover:bg-white/10">{hero.secondaryCta}</a>
+      </div>
+      <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-[#c5b7a5]">
+        {hero.facts.map((fact) => <span>{fact}</span>)}
+      </div>
+    </div>
+    <div class="mt-10 flex justify-center lg:mt-0 lg:justify-end">
+      <div class="ticket w-full max-w-[350px] p-7 shadow-2xl">
+        <div class="flex items-start justify-between gap-4 border-b border-dashed border-black/25 pb-5">
+          <div>
+            <p class="text-xs font-black tracking-[.18em] text-[#8a3e21]">{content.ticket.eyebrow}</p>
+            <h2 class="mt-1 text-2xl font-black">{content.ticket.title}</h2>
+          </div>
+          <div class="rounded-full border-2 border-[#a34726] px-2 py-1 text-xs font-black text-[#a34726]">{content.ticket.free}</div>
+        </div>
+        <dl class="mt-5 space-y-4 text-sm">
+          {content.ticket.rows.map((row) => (
+            <div class="flex justify-between gap-4">
+              <dt class="font-bold text-black/55">{row.label}</dt>
+              <dd class="font-black">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="mt-6 rounded-xl bg-black/6 p-3 text-xs leading-relaxed text-black/65">{content.ticket.note}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-14">
+  <div class="container grid gap-7 md:grid-cols-3">
+    {content.introCards.map((card) => (
+      <article class="sign-card p-6">
+        <p class="kicker">{card.eyebrow}</p>
+        <h2 class="mt-2 text-2xl font-black text-[#fff3cf]">{card.title}</h2>
+        <p class="mt-3 text-[#cfc0ae]">{card.text}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section id="eat" class="section">
+  <div class="container">
+    <div class="mb-10 grid gap-6 lg:grid-cols-[.7fr_1.3fr] lg:items-end">
+      <div>
+        <p class="kicker">{content.eat.kicker}</p>
+        <h2 class="display mt-2 text-5xl font-black text-[#fff3cf] md:text-6xl">
+          {content.eat.titleLines[0]}<br />{content.eat.titleLines[1]}
+        </h2>
+      </div>
+      <p class="max-w-2xl text-lg text-[#cfc0ae]">{content.eat.lead}</p>
+    </div>
+    <div class="grid gap-5 md:grid-cols-2">
+      {content.eat.foods.map((food, i) => (
+        <article class="sign-card group p-6 transition hover:-translate-y-1 hover:border-white/20">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-4xl font-black text-white/10">0{i + 1}</span>
+            <span class="sticker text-xs">{food.tag}</span>
+          </div>
+          <h3 class="mt-4 text-2xl font-black text-[#fff3cf]">{food.name}</h3>
+          <p class="mt-3 text-[#d5c7b5]">{food.text}</p>
+          <p class="mt-4 border-l-2 border-[#ff6a21] pl-3 text-sm text-[#a99b8b]">{food.hint}</p>
+        </article>
+      ))}
+    </div>
+    <p class="mt-6">
+      <a class="font-black text-[#ffb20f] underline decoration-white/20 underline-offset-4" href={guides[0].href}>{content.eat.moreLabel}</a>
+    </p>
+  </div>
+</section>
+
+<section class="section bg-white/[.025]">
+  <div class="container">
+    <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+      <div>
+        <p class="kicker">{content.photos.kicker}</p>
+        <h2 class="display mt-2 text-4xl font-black md:text-5xl">{content.photos.title}</h2>
+      </div>
+      <p class="max-w-xl text-sm text-[#a99b8b]">{content.photos.note}</p>
+    </div>
+    <div class="mt-10 grid gap-5 lg:grid-cols-12">
+      <figure class="photo-frame market-border lg:col-span-7">
+        <img src={photoLead.src} alt={photoLead.alt} width="1200" height="800" class="aspect-[16/10] h-full w-full object-cover" loading="lazy" />
+        <figcaption class="absolute bottom-0 z-10 p-5 text-sm text-white/85">{photoLead.caption}</figcaption>
+      </figure>
+      <div class="grid gap-5 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1">
+        {photoRest.map((photo) => (
+          <figure class="photo-frame market-border">
+            <img src={photo.src} alt={photo.alt} width="1200" height="800" class="aspect-[16/9] h-full w-full object-cover" loading="lazy" />
+            <figcaption class="absolute bottom-0 z-10 p-4 text-sm text-white/85">{photo.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plan" class="section">
+  <div class="container grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
+    <div>
+      <p class="kicker">{content.plan.kicker}</p>
+      <h2 class="display mt-2 text-5xl font-black">{content.plan.title}</h2>
+      <div class="timeline mt-8 ml-2 space-y-8">
+        {content.plan.steps.map((step) => (
+          <div class="timeline-item">
+            <h3 class="font-black text-[#fff3cf]">{step.title}</h3>
+            <p class="mt-1 text-[#c7b8a6]">{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2">
+      {content.plan.practical.map((card, i) => {
+        const isTicket = i === 0;
+        return (
+          <div class={isTicket ? 'ticket p-6' : 'sign-card p-6'}>
+            <p class={isTicket ? 'text-xs font-black tracking-[.16em] text-[#a64d28]' : 'kicker'}>{card.eyebrow}</p>
+            <h3 class={isTicket ? 'mt-2 text-2xl font-black' : 'mt-2 text-2xl font-black text-[#fff3cf]'}>{card.title}</h3>
+            <p class={isTicket ? 'mt-3 text-black/70' : 'mt-3 text-[#c7b8a6]'}>{card.text}</p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<section id="transport" class="section bg-[#f4ead2] text-[#22130f]">
+  <div class="container">
+    <div class="grid gap-8 lg:grid-cols-[.75fr_1.25fr]">
+      <div>
+        <p class="text-xs font-black uppercase tracking-[.2em] text-[#a84727]">{content.transport.kicker}</p>
+        <h2 class="display mt-2 text-5xl font-black">
+          {content.transport.titleLines[0]}<br />{content.transport.titleLines[1]}
+        </h2>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {content.transport.cards.map((card) => (
+          <article class="rounded-2xl border border-black/10 bg-white/45 p-5">
+            <p class="font-black">{card.icon} {card.title}</p>
+            <p class="mt-2 text-sm text-black/65">{card.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+    <div class="mt-9 rounded-3xl border border-black/10 bg-[#22130f] p-6 text-[#f8edda] md:p-8">
+      <div class="grid gap-5 md:grid-cols-[.3fr_1fr]">
+        <div>
+          <p class="kicker">{content.transport.parkingTitle}</p>
+        </div>
+        <div>
+          <p class="text-[#d9c9b2]">{content.transport.parkingText}</p>
+          <p class="mt-3 text-sm text-[#aa9a86]">{content.transport.parkingNote}</p>
+          <p class="mt-3">
+            <a class="font-black text-[#ffb20f] underline underline-offset-4" href={locale === 'zh' ? guides[1].href : '#plan'}>{content.transport.moreLabel}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nearby" class="section">
+  <div class="container">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <p class="kicker">{content.nearby.kicker}</p>
+        <h2 class="display mt-2 text-4xl font-black md:text-5xl">{content.nearby.title}</h2>
+        <div class="mt-8 space-y-4">
+          {content.nearby.sights.map((sight) => (
+            <article class="sign-card flex gap-4 p-5">
+              <div class="mt-1 h-10 w-10 shrink-0 rounded-full border border-[#ffb20f]/35 bg-[#ffb20f]/10 text-center text-sm font-black leading-10 text-[#ffb20f]">{sight.type.slice(0, 1)}</div>
+              <div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="font-black text-[#fff3cf]">{sight.name}</h3>
+                  <span class="rounded-full bg-white/5 px-2 py-0.5 text-[11px] text-[#9f9181]">{sight.type}</span>
+                </div>
+                <p class="mt-1 text-sm text-[#b9aa99]">{sight.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div>
+        <p class="kicker">One more bite</p>
+        <h2 class="display mt-2 text-4xl font-black md:text-5xl">{content.nearby.extraTitle}</h2>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {content.nearby.extras.map((extra) => (
+            <article class="sign-card p-5">
+              <p class="kicker">{extra.eyebrow}</p>
+              <h3 class="mt-2 font-black text-[#fff3cf]">{extra.title}</h3>
+              <p class="mt-2 text-sm text-[#b9aa99]">{extra.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white/[.025]">
+  <div class="container">
+    <div class="mb-8 grid gap-5 md:grid-cols-[.8fr_1.2fr] md:items-end">
+      <div>
+        <p class="kicker">{content.guides.kicker}</p>
+        <h2 class="display mt-2 text-4xl font-black md:text-5xl">{content.guides.title}</h2>
+      </div>
+      <p class="text-[#b1a291]">{content.guides.text}</p>
+    </div>
+    <div class="grid gap-5 md:grid-cols-3">
+      {guides.map((guide) => (
+        <a class="sign-card p-6 transition hover:-translate-y-1 hover:border-white/20" href={guide.href}>
+          <h3 class="text-xl font-black text-[#fff3cf]">{guide.title}</h3>
+          <p class="mt-3 text-sm text-[#b1a291]">{guide.text}</p>
+          <p class="mt-4 text-sm font-black text-[#ffb20f]">{guide.href}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section id="map" class="section pt-8">
+  <div class="container">
+    <div class="mb-7 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+      <div>
+        <p class="kicker">{content.map.kicker}</p>
+        <h2 class="display mt-2 text-4xl font-black md:text-5xl">{content.map.title}</h2>
+      </div>
+      <a class="text-sm font-bold text-[#ffb20f] underline decoration-white/20 underline-offset-4" href={ATTRACTION.mapsShare} rel="noopener noreferrer" target="_blank">{content.map.openLabel}</a>
+    </div>
+    <div class="map-wrap market-border overflow-hidden rounded-3xl bg-[#14101a]">
+      <iframe
+        title={currentName}
+        src={ATTRACTION.mapsEmbed}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <div class="container grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
+    <div>
+      <p class="kicker">{content.faq.kicker}</p>
+      <h2 class="display mt-2 text-5xl font-black">
+        {content.faq.titleLines[0]}<br />{content.faq.titleLines[1]}
+      </h2>
+      <p class="mt-5 max-w-md text-[#aa9b8a]">{content.faq.note}</p>
+    </div>
+    <div class="faq">
+      {content.faq.items.map((item, i) => (
+        <details open={i === 0}>
+          <summary>{item.q}</summary>
+          <p class="mt-3 max-w-3xl text-[#bdae9c]">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="pb-10">
+  <div class="container rounded-3xl border border-white/10 bg-white/[.03] p-6 text-sm text-[#998b7b] md:p-8">
+    <p class="font-black text-[#d6c6b4]">{content.sources.title}</p>
+    <p class="mt-2">{content.sources.text}</p>
+    <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+      {content.sources.links.map((link) => (
+        <a class="underline underline-offset-4" href={link.href} rel="noopener noreferrer" target="_blank">{link.label}</a>
+      ))}
+    </div>
+  </div>
+</section>

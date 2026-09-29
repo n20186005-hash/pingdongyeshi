@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeContent from '../../components/HomeContent.astro';
+import { enContent } from '../../content/home.en';
+import { attractionSchema, faqSchema, organizationSchema, websiteSchema } from '../../lib/schema';
+
+const jsonLd = [
+  organizationSchema(),
+  websiteSchema('en'),
+  attractionSchema('en'),
+  faqSchema(enContent.faq.items)
+];
+---
+
+<BaseLayout
+  locale="en"
+  title={enContent.metaTitle}
+  description={enContent.metaDescription}
+  jsonLd={jsonLd}
+  alternates={['zh', 'en']}
+  isHome
+>
+  <HomeContent locale="en" content={enContent} />
+</BaseLayout>

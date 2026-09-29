@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GuidePage from '../components/GuidePage.astro';
+import { getGuide } from '../content/guides.zh';
+import { SITE_URL } from '../data/site';
+import { breadcrumbSchema, faqSchema } from '../lib/schema';
+
+const guide = getGuide('transport');
+const jsonLd = [
+  breadcrumbSchema([
+    { name: '首頁', url: SITE_URL },
+    { name: guide.breadcrumb, url: `${SITE_URL}/transport/` }
+  ]),
+  faqSchema(guide.faqs)
+];
+---
+
+<BaseLayout
+  locale="zh"
+  path="transport"
+  title={guide.title}
+  description={guide.description}
+  jsonLd={jsonLd}
+>
+  <GuidePage locale="zh" guide={guide} />
+</BaseLayout>
