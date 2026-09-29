@@ -1,5 +1,18 @@
+# Dependencies
 node_modules/
+old-node_modules/
+empty-real-nm/
+nm-link
+
+# Build output
 dist/
 .astro/
+
+# Cloudflare
 .wrangler/
+.dev.vars
+
+# OS / editor
 .DS_Store
+Thumbs.db
+*.log
