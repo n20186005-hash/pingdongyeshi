@@ -101,3 +101,11 @@ a { color: inherit; }
   .section { padding: 4.25rem 0; }
   .map-wrap iframe { min-height: 360px; }
 }
+
+.container > *, .grid > *, .flex > * { min-width: 0; }
+.ticket dd { overflow-wrap: anywhere; }
+@media(max-width: 620px) {
+  header .container { gap: .5rem; }
+  header img { width: min(36vw, 160px); height: auto; }
+  header .container > div { gap: .4rem; flex-shrink: 0; }
+}

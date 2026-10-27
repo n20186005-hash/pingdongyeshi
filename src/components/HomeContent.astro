@@ -1,6 +1,6 @@
 ---
 import { ATTRACTION, type Locale } from '../data/site';
-import { guideLinks, ui } from '../i18n';
+import { guideLinks } from '../i18n';
 import type { GuideContent } from '../content/types';
 
 interface Props {
@@ -40,6 +40,7 @@ const currentName = ATTRACTION.name[locale];
         {hero.titleTop}<br /><span class="text-[#ffb20f]">{hero.titleAccent}</span>
       </h1>
       <p class="mt-7 max-w-2xl text-lg text-[#e4d8c7] md:text-xl">{hero.lead}</p>
+      <p class="mt-3 max-w-2xl text-xs text-[#d1c1ac]">{content.photos.note}</p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="#eat" class="rounded-full bg-[#f12d3c] px-6 py-3 font-black text-white shadow-[0_0_30px_rgba(241,45,60,.28)] transition hover:scale-[1.02]">{hero.primaryCta}</a>
         <a href="#plan" class="rounded-full border border-white/20 bg-white/5 px-6 py-3 font-bold text-[#fff3cf] backdrop-blur transition hover:bg-white/10">{hero.secondaryCta}</a>
@@ -108,7 +109,7 @@ const currentName = ATTRACTION.name[locale];
       ))}
     </div>
     <p class="mt-6">
-      <a class="font-black text-[#ffb20f] underline decoration-white/20 underline-offset-4" href={guides[0].href}>{content.eat.moreLabel}</a>
+      <a class="font-black text-[#ffb20f] underline decoration-white/20 underline-offset-4" href={locale === 'zh' ? guides[0].href : '#faq'}>{content.eat.moreLabel}</a>
     </p>
   </div>
 </section>
@@ -205,42 +206,22 @@ const currentName = ATTRACTION.name[locale];
 
 <section id="nearby" class="section">
   <div class="container">
-    <div class="grid gap-12 lg:grid-cols-2">
-      <div>
-        <p class="kicker">{content.nearby.kicker}</p>
-        <h2 class="display mt-2 text-4xl font-black md:text-5xl">{content.nearby.title}</h2>
-        <div class="mt-8 space-y-4">
-          {content.nearby.sights.map((sight) => (
-            <article class="sign-card flex gap-4 p-5">
-              <div class="mt-1 h-10 w-10 shrink-0 rounded-full border border-[#ffb20f]/35 bg-[#ffb20f]/10 text-center text-sm font-black leading-10 text-[#ffb20f]">{sight.type.slice(0, 1)}</div>
-              <div>
-                <div class="flex flex-wrap items-center gap-2">
-                  <h3 class="font-black text-[#fff3cf]">{sight.name}</h3>
-                  <span class="rounded-full bg-white/5 px-2 py-0.5 text-[11px] text-[#9f9181]">{sight.type}</span>
-                </div>
-                <p class="mt-1 text-sm text-[#b9aa99]">{sight.text}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-      <div>
-        <p class="kicker">One more bite</p>
-        <h2 class="display mt-2 text-4xl font-black md:text-5xl">{content.nearby.extraTitle}</h2>
-        <div class="mt-8 grid gap-4 sm:grid-cols-2">
-          {content.nearby.extras.map((extra) => (
-            <article class="sign-card p-5">
-              <p class="kicker">{extra.eyebrow}</p>
-              <h3 class="mt-2 font-black text-[#fff3cf]">{extra.title}</h3>
-              <p class="mt-2 text-sm text-[#b9aa99]">{extra.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
+    <p class="kicker">{content.nearby.kicker}</p>
+    <h2 class="display mt-2 text-4xl font-black md:text-5xl">{content.nearby.title}</h2>
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+      {content.nearby.sights.map((sight, i) => (
+        <article class="sign-card p-5">
+          <p class="kicker">0{i + 1} · {sight.type}</p>
+          <h3 class="mt-3 text-xl font-black text-[#fff3cf]">{sight.name}</h3>
+          <p class="mt-3 text-sm text-[#b9aa99]">{sight.text}</p>
+          {sight.source && <a href={sight.source} class="mt-4 inline-block text-sm text-[#ffb20f] underline" target="_blank" rel="noopener noreferrer">{locale === 'zh' ? '縣政府旅遊介紹 ↗' : 'County tourism source ↗'}</a>}
+        </article>
+      ))}
     </div>
   </div>
 </section>
 
+{locale === 'zh' && (
 <section class="section bg-white/[.025]">
   <div class="container">
     <div class="mb-8 grid gap-5 md:grid-cols-[.8fr_1.2fr] md:items-end">
@@ -261,6 +242,8 @@ const currentName = ATTRACTION.name[locale];
     </div>
   </div>
 </section>
+
+)}
 
 <section id="map" class="section pt-8">
   <div class="container">

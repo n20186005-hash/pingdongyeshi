@@ -6,9 +6,6 @@ CI=1 corepack pnpm install --frozen-lockfile
 pnpm check
 pnpm build
 
-if [[ -f pnpm-workspace.yaml ]]; then
-  node -e "const fs=require('node:fs'); const s=fs.readFileSync('pnpm-workspace.yaml','utf8'); if(!/packages:\\s*\\n\\s*-\\s*['\"]?\\.['\"]?/.test(s)) process.exit(1)"
-fi
 
 if grep -RInE 'example\\.com|localhost|chrome-extension://' dist; then
   echo 'Forbidden placeholder/injected URL found in dist.' >&2

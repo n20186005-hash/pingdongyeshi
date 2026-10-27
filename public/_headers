@@ -7,3 +7,6 @@
 
 /sw.js
   Cache-Control: no-cache
+
+/CREDITS.txt
+  Content-Type: text/plain; charset=utf-8

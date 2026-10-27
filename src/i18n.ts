@@ -52,9 +52,9 @@ export const ui = {
     ],
     guideTitle: '延伸閱讀',
     guides: [
-      { href: '/food/', title: '屏東夜市必吃美食', text: '10 種在地小吃、點餐順序與分食建議。' },
-      { href: '/transport/', title: '交通與停車指南', text: '台鐵、客運、自駕與停車場位置一次整理。' },
-      { href: '/hours/', title: '營業時間與最佳時段', text: '官方時段、人潮節奏、雨天備案與尖峰提醒。' }
+      { href: '/food/', title: '屏東夜市必吃美食', text: '官方介紹的四類小吃、點餐與飲食需求確認。' },
+      { href: '/transport/', title: '交通與停車指南', text: '車站起點、班次、合法停車與下客的行前核對。' },
+      { href: '/hours/', title: '營業時間與最佳時段', text: '官方與地圖時段分開看，逐店確認與天候安排。' }
     ],
     disclaimer:
       '非官方旅遊資訊網站，與屏東縣政府、Google 或夜市各攤商無隸屬或代表關係；營業、價格、交通與活動資訊請以現場及官方公告為準。',

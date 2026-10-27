@@ -1,8 +1,8 @@
-const CACHE = 'pingdongyeshi-v2026.09.09';
-const FALLBACK = '/';
+const CACHE = 'pingdongyeshi-v2026.10.26';
+
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.add(FALLBACK)).then(() => self.skipWaiting()));
+  e.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', (e) => {
@@ -15,16 +15,16 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   const req = e.request;
-  if (req.method !== 'GET' || !req.url.startsWith(self.location.origin)) return;
+  if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
   if (req.mode === 'navigate') {
     e.respondWith(
       fetch(req)
         .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
+          if (res.ok) { const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {}); }
           return res;
         })
-        .catch(() => caches.match(req).then((r) => r || caches.match(FALLBACK)))
+        .catch(() => caches.match(req).then((r) => r || new Response('Offline: this page has not been cached.', {status:503,headers:{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'}})))
     );
     return;
   }

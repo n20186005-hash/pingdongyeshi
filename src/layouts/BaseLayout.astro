@@ -55,7 +55,7 @@ const robotsContent = noindex
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:image:alt" content={locale === 'en' ? ATTRACTION.name.en : ATTRACTION.name.zh} />
+    <meta property="og:image:alt" content={locale === 'en' ? 'Original conceptual market illustration, not a photograph' : '原創概念示意圖，非屏東夜市實景攝影'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -72,7 +72,7 @@ const robotsContent = noindex
       <script type="application/ld+json" is:inline set:html={JSON.stringify(item)}></script>
     ))}
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -89,7 +89,7 @@ const robotsContent = noindex
     <SiteFooter locale={locale} />
     <script is:inline>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+        window.addEventListener('load', () => { if (location.protocol === 'https:') navigator.serviceWorker.register('/sw.js').catch(() => {}); });
       }
     </script>
   </body>

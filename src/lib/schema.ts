@@ -12,12 +12,11 @@ export function attractionSchema(locale: Locale) {
 
   return {
     '@context': 'https://schema.org',
-    '@type': ['TouristAttraction', 'LocalBusiness'],
+    '@type': 'TouristAttraction',
     '@id': ATTRACTION_ID,
     name: ATTRACTION.name[locale],
     alternateName: ATTRACTION.alternateName[locale],
     description: ATTRACTION.description[locale],
-    image: [ATTRACTION.hero.src, ...ATTRACTION.gallery.map((photo) => photo.src)].map((src) => `${SITE_URL}${src}`),
     url: SITE_URL,
     address: {
       '@type': 'PostalAddress',
@@ -39,18 +38,7 @@ export function attractionSchema(locale: Locale) {
     },
     hasMap: ATTRACTION.mapsShare,
     sameAs: [...ATTRACTION.sameAs],
-    openingHours: ATTRACTION.openingHours,
-    isAccessibleForFree: true,
-    publicAccess: true,
-    priceRange: '$$',
     telephone: undefined,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: ATTRACTION.rating,
-      reviewCount: ATTRACTION.reviewCount,
-      bestRating: 5,
-      worstRating: 1
-    }
   };
 }
 
@@ -98,6 +86,6 @@ export function organizationSchema() {
     '@id': ORGANIZATION_ID,
     name: 'pingdongyeshi.com',
     url: SITE_URL,
-    description: '非官方・屏東觀光夜市旅遊資訊站'
+    description: '獨立、非官方、非營利的屏東觀光夜市旅遊科普指南'
   };
 }

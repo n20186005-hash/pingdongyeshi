@@ -15,9 +15,9 @@ export function withSiteName(front: string, locale: Locale = 'zh'): string {
   return `${front} | ${siteName(locale)}`;
 }
 
-export const RATING_NOTE_ZH = '評分同步自 Google 地圖（2026 年 9 月），屬指示性參考，請以 Google 地圖最新顯示為準。';
+export const RATING_NOTE_ZH = 'Google地圖公開快照，2026年10月26日核對；評分與評論數會變動。';
 export const RATING_NOTE_EN =
-  'Ratings are synced from Google Maps (September 2026) as indicative snapshots; check the live listing before you go.';
+  'Google Maps public snapshot checked 26 October 2026; rating and review count may change.';
 
 export const ATTRACTION = {
   name: { zh: '屏東觀光夜市', en: 'Pingtung Night Market' },
@@ -26,8 +26,8 @@ export const ATTRACTION = {
     en: ['Pingtung Tourist Night Market', 'Minzu Road Night Market']
   },
   description: {
-    zh: '位於屏東市民族路、鄰近屏東車站的老字號美食街區，以蒸式肉圓、雞肉飯、羹湯、汕頭火鍋與冰品聞名，從白天一路吃到深夜。',
-    en: 'A long-running food street along Minzu Road in Pingtung City, minutes from Pingtung railway station, known for steamed ba-wan, chicken rice, savoury thick soups, Shantou hotpot and icy desserts.'
+    zh: '屏東市民族路的美食街區。縣政府旅遊頁介紹蒸式肉圓、香菇肉羹、汕頭火鍋與愛玉冰；各店時段需分別確認。',
+    en: 'A food street on Minzu Road in Pingtung City. The county tourism page highlights steamed ba-wan, mushroom thick soup, Shantou hotpot and aiyu jelly; check each vendor separately.'
   },
   streetAddress: { zh: '民族路36號', en: 'No. 36, Minzu Rd' },
   addressLocality: { zh: '屏東市', en: 'Jinquan Village, Pingtung City' },
@@ -36,9 +36,9 @@ export const ATTRACTION = {
   addressCountry: 'TW',
   plusCode: 'MF9Q+XW Jinquan Village, Pingtung City, Pingtung County, Taiwan',
   geo: { latitude: 22.6698878, longitude: 120.4898724 },
-  openingHours: 'Mo-Su 10:30-00:00',
+  openingHours: 'Tourism listing 10:30–00:00; Maps24h snapshot2026-10-26; vendorhoursvary',
   rating: 4.2,
-  reviewCount: 22371,
+  reviewCount: 22434,
   mapsShare: 'https://maps.app.goo.gl/hiM2jusJtw8vg6D87',
   mapsEmbed:
     'https://www.google.com/maps?q=%E5%B1%8F%E6%9D%B1%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82&output=embed&hl=zh-TW&gl=tw',
@@ -49,21 +49,21 @@ export const ATTRACTION = {
     'https://www.google.com/maps/place/%E5%B1%8F%E4%B8%9C%E8%A7%82%E5%85%89%E5%A4%9C%E5%B8%82/data=!4m7!3m6!1s0x346e1784503cbaed:0x8549a3a6db254816!8m2!3d22.6698878!4d120.4898724!16s%2Fg%2F11b_2qfnfj'
   ],
   hero: {
-    src: '/images/pingtung-night-market-hero.png',
-    alt: '屏東觀光夜市民族路傍晚街景，招牌亮起、人潮沿街移動',
-    caption: '民族路入夜後，招牌、蒸氣與人聲一起把街道點亮。'
+    src: '/images/market-hero.svg',
+    alt: '原創概念示意圖，非實景攝影 / Original conceptual illustration, not a photograph',
+    caption: '非屏東夜市實景，不代表特定攤商或料理 / Not an actual market view or a verified vendor or dish'
   },
   gallery: [
     {
-      src: '/images/pingtung-night-market-street.png',
-      alt: '屏東觀光夜市巷內老店面與夜市街屋',
-      caption: '夜市不只是攤販，也藏著許多經營多年的固定店面。'
+      src: '/images/market-lane.svg',
+      alt: '原創概念示意圖，非實景攝影 / Original conceptual illustration, not a photograph',
+      caption: '非屏東夜市實景，不代表特定攤商或料理 / Not an actual market view or a verified vendor or dish'
     },
     {
-      src: '/images/pingtung-night-market-food.jpg',
-      alt: '屏東觀光夜市店家現做的碗裝小吃',
-      caption: '屏東夜市的魅力，來自每天重複備料、開火、端菜的日常。'
+      src: '/images/market-food.svg',
+      alt: '原創概念示意圖，非實景攝影 / Original conceptual illustration, not a photograph',
+      caption: '非屏東夜市實景，不代表特定攤商或料理 / Not an actual market view or a verified vendor or dish'
     }
   ],
-  ogImage: '/images/og-cover.jpg'
+  ogImage: '/images/market-hero.svg'
 } as const;

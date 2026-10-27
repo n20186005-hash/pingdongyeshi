@@ -1,0 +1,14 @@
+{
+  "zh": {
+    "nonprofit": "獨立、非官方、非營利的旅遊科普指南；不代表屏東縣政府、夜市管理方或個別攤商，也不提供訂位或售票服務。",
+    "privacy": "本網站會直接載入Google Analytics（G-HXM22WWPKP），目前沒有站內分析偏好開關。Google可能處理裝置與使用資料；嵌入地圖載入時也會連至Google。外部連結由各服務提供者處理。Service worker可能在瀏覽器儲存成功載入的本站頁面與資源；清除網站資料可移除。Cloudflare託管可能另外加入效能量測，與Google分析分開；僅有腳本不證明當次資料已成功傳送。",
+    "checked": "資料核對日期：2026年10月26日。營業與通行條件可能改變，出發前請向官方及目標店家確認。",
+    "photo": "原創概念示意圖，非屏東夜市實景、非攝影，不代表特定攤商、料理或目前街道配置。"
+  },
+  "en": {
+    "nonprofit": "Independent, unofficial, nonprofit educational travel guide. It does not represent the county government, market management or vendors and does not provide reservations or ticket sales.",
+    "privacy": "This site directly loads Google Analytics (G-HXM22WWPKP) and currently has no on-site analytics preference switch. Google may process device and usage data; loading the embedded map also connects to Google. External links use their respective providers. The service worker may store successful same-origin pages and assets in your browser; clearing site data removes them. Cloudflare hosting may add separate performance measurement. Script presence alone does not prove successful data transmission.",
+    "checked": "Sources checked 26 October 2026. Opening and access arrangements may change; confirm with official sources and your intended vendor before travelling.",
+    "photo": "Original conceptual illustration, not a photograph or an actual view of Pingtung Night Market. It does not depict a verified vendor, dish or current street layout."
+  }
+}

@@ -1,5 +1,6 @@
 ---
 import { ATTRACTION, type Locale } from '../data/site';
+import disclosures from '../data/disclosures.json';
 import { guideLinks, localizedPath, ui } from '../i18n';
 
 interface Props {
@@ -16,7 +17,7 @@ const homeHref = localizedPath(locale);
   <div class="container grid gap-8 md:grid-cols-[1.3fr_.7fr]">
     <div>
       <img src="/logo.svg" alt={copy.brandAlt} class="h-11 w-auto opacity-90" />
-      <p class="mt-3 max-w-2xl text-sm text-[#8f8171]">{copy.disclaimer}</p>
+      <p class="mt-3 max-w-2xl text-sm text-[#8f8171]">{disclosures[locale].nonprofit}</p>
       <p class="mt-4 text-sm text-[#8f8171]">
         {locale === 'en'
           ? `${ATTRACTION.streetAddress.en}, ${ATTRACTION.addressLocality.en}, ${ATTRACTION.addressRegion.en} ${ATTRACTION.postalCode}, Taiwan · Plus Code ${ATTRACTION.plusCode.split(' ')[0]}`
@@ -35,7 +36,9 @@ const homeHref = localizedPath(locale);
           <li><a class="text-[#a1978a] underline underline-offset-4 hover:text-[#ffb20f]" href={guide.href}>{guide.title}</a></li>
         ))}
       </ul>
-      <p class="mt-6 text-xs text-[#6f655b]">{copy.tagline}</p>
+      <p class="mt-6 text-xs text-[#8f8171]">{disclosures[locale].checked}</p>
+      <p class="mt-4 text-xs text-[#8f8171]">{disclosures[locale].privacy} <a href="https://policies.google.com/privacy" class="underline">Google</a> · <a href="https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/" class="underline">Cloudflare</a></p>
+      <a href="/CREDITS.txt" class="mt-4 block text-sm underline">{locale === 'en' ? 'Original illustration credits' : '原創示意圖說明與授權'}</a>
     </div>
   </div>
 </footer>

@@ -1,6 +1,6 @@
 export type Photo = { src: string; alt: string; caption: string };
 export type Food = { name: string; tag: string; text: string; hint: string };
-export type Sight = { name: string; type: string; text: string };
+export type Sight = { name: string; type: string; text: string; source?: string };
 export type Faq = { q: string; a: string };
 export type Step = { title: string; text: string };
 export type Card = { eyebrow: string; title: string; text: string };
